@@ -20,6 +20,7 @@ public class ExpandGridView extends GridView {
         super(context, attrs, defStyleAttr);
     }
 
+    //解决滚动中gridView高度为0 bug
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2, MeasureSpec.AT_MOST);

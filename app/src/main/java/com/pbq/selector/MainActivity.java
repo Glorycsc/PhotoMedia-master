@@ -40,16 +40,18 @@ public class MainActivity extends AppCompatActivity {
      */
     private static final int REQUEST_CODE_GET_VEDIOS = 2000;
     /**
-     * 常量，标识录像选择请求码
+     * 常量，标识音频选择请求码
      */
     private static final int REQUEST_CODE_GET_AUDIOS = 3000;
     private ExpandGridView gv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         gv = (ExpandGridView) findViewById(R.id.gv);
     }
+
     /**
      * 照片选择
      *
@@ -61,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
 //        i.putStringArrayListExtra("pickerPaths", selectedImagesPaths);
         startActivityForResult(i, REQUEST_CODE_GET_PHOTOS);
     }
+
     /**
      * 音频选择
      *
@@ -74,8 +77,10 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(i, REQUEST_CODE_GET_AUDIOS);
 //        Toast.makeText(getApplicationContext(),"后期加入选择音频.....",Toast.LENGTH_SHORT).show();
     }
+
     /**
      * 视频选择
+     *
      * @param view
      */
     public void chooseVideo(View view) {
@@ -94,13 +99,13 @@ public class MainActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
                     //取出选择的相片路径
                     files = (ArrayList<File>) data.getSerializableExtra("files");
-                    for(int i=0;i<files.size();i++){
+                    for (int i = 0; i < files.size(); i++) {
                         selectedImagesPaths.add(files.get(i).getPath());
                         Bitmap bmp = BitmapFactory.decodeFile(files.get(i).getPath());
-                        Log.i("zll",i+"文件的大小=="+getFileSize(files.get(i)));
-                        Log.i("zll",i+"图片=="+files.get(i).getPath());
-                        Log.i("zll",i+"宽=="+bmp.getWidth());
-                        Log.i("zll",i+"高=="+bmp.getHeight());
+                        Log.i("zll", i + "文件的大小==" + getFileSize(files.get(i)));
+                        Log.i("zll", i + "图片==" + files.get(i).getPath());
+                        Log.i("zll", i + "宽==" + bmp.getWidth());
+                        Log.i("zll", i + "高==" + bmp.getHeight());
                     }
 
                     MyAdapter adapter = new MyAdapter(selectedImagesPaths);
@@ -108,14 +113,14 @@ public class MainActivity extends AppCompatActivity {
                     //将选择的图片路径放入文件中
                     //清空文件
                     files.clear();
-                    for (int i=0;i<selectedImagesPaths.size();i++){
-                        File fileImage=new File(selectedImagesPaths.get(i));
+                    for (int i = 0; i < selectedImagesPaths.size(); i++) {
+                        File fileImage = new File(selectedImagesPaths.get(i));
                         files.add(fileImage);
                         Log.i("TGA", selectedImagesPaths.get(i));
-                        Log.i("TGA", fileImage+"");
+                        Log.i("TGA", fileImage + "");
                     }
                     //上传
-                    Toast.makeText(getApplicationContext(),selectedImagesPaths+"",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), selectedImagesPaths + "", Toast.LENGTH_SHORT).show();
                 }
                 break;
             //录像选择返回事件
@@ -128,14 +133,14 @@ public class MainActivity extends AppCompatActivity {
                     //将选择的视频路径放入文件中
                     //清空视频文件
                     files.clear();
-                    for (int i=0;i<selectedVedioPaths.size();i++){
-                        File fileVedio=new File(selectedVedioPaths.get(i));
+                    for (int i = 0; i < selectedVedioPaths.size(); i++) {
+                        File fileVedio = new File(selectedVedioPaths.get(i));
                         files.add(fileVedio);
                         Log.i("TGA", selectedVedioPaths.get(i));
-                        Log.i("TGA", fileVedio+"");
+                        Log.i("TGA", fileVedio + "");
                     }
                     //上传
-                    Toast.makeText(getApplicationContext(),selectedVedioPaths+"",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), selectedVedioPaths + "", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -143,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * 获取文件的大小
+     *
      * @return
      */
     private String getFileSize(File f) {
